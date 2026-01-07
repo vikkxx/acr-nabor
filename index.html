@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>NÁBOR AČR | RD Military</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; padding: 0; font-family: 'Roboto Mono', monospace; color: #e0e0e0; background: #0a0a0a url('https://images.unsplash.com/photo-1590236170054-99882962479e?auto=format&fit=crop&q=80&w=1920') no-repeat center center fixed; background-size: cover; }
+        .background-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(18, 26, 15, 0.92); z-index: -1; }
+        .container { max-width: 700px; margin: 40px auto; background: rgba(0, 0, 0, 0.95); border: 1px solid #4a5d23; padding: 40px; border-top: 6px solid #4a5d23; box-shadow: 0 0 40px rgba(0,0,0,0.8); }
+        
+        .header-logos { display: flex; align-items: center; justify-content: center; gap: 30px; margin-bottom: 25px; }
+        .logo-acr { width: 100px; filter: drop-shadow(0 0 5px rgba(255,255,255,0.1)); }
+        .logo-rd { width: 90px; opacity: 0.45; } /* RD Logo transparentní 45% */
+        
+        header { text-align: center; border-bottom: 2px solid #4a5d23; padding-bottom: 20px; margin-bottom: 30px; }
+        h1 { font-family: 'Oswald', sans-serif; letter-spacing: 3px; color: #fff; margin: 10px 0; text-transform: uppercase; }
+        
+        .form-step { display: none; }
+        .active { display: block; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #8fa366; text-transform: uppercase; font-size: 0.8em; font-weight: bold; }
+        input, textarea, select { width: 100%; background: #0c0c0c; border: 1px solid #333; color: white; padding: 12px; font-family: 'Roboto Mono'; box-sizing: border-box; border-radius: 0; }
+        input:focus { border-color: #8fa366; outline: none; }
+
+        .btn { border: none; padding: 18px; font-weight: bold; cursor: pointer; width: 100%; font-family: 'Oswald', sans-serif; text-transform: uppercase; background: #4a5d23; color: white; margin-top: 10px; transition: 0.3s; font-size: 1.1em; }
+        .btn:hover { background: #637d2f; letter-spacing: 1px; }
+
+        footer { text-align: center; margin-top: 40px; font-size: 0.8em; color: #555; border-top: 1px solid #222; padding-top: 20px; }
+        .author { color: #8fa366; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="background-overlay"></div>
+
+<div class="container">
+    <header>
+        <div class="header-logos">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Emblem_of_the_Czech_Army.svg/1200px-Emblem_of_the_Czech_Army.svg.png" alt="AČR" class="logo-acr">
+            <img src="https://via.placeholder.com/150/ffffff/000000?text=RD+LOGO" alt="RD" class="logo-rd">
+        </div>
+        <h1>NÁBOROVÉ STŘEDISKO AČR</h1>
+        <p style="color: #4a5d23; font-weight: bold; letter-spacing: 2px;">[ RD MILITARY ROLEPLAY ]</p>
+    </header>
+
+    <form id="armyForm">
+        <div class="form-step active" id="step1">
+            <h2 style="color: #c4d6a0; border-left: 4px solid #4a5d23; padding-left: 10px;">01 | OOC DOTAZNÍK</h2>
+            <div class="input-group">
+                <label>Tvůj Discord Nickname:</label>
+                <input type="text" id="discord" required placeholder="např. pepa_rp#1234">
+            </div>
+            <div class="input-group">
+                <label>Věk (OOC):</label>
+                <input type="number" id="age" required min="13">
+            </div>
+            <div class="input-group">
+                <label>Něco o sobě:</label>
+                <textarea id="ooc_bio" rows="3" required placeholder="Tvé zkušenosti, co tě baví..."></textarea>
+            </div>
+            <div style="display:flex; gap:10px;">
+                <div class="input-group" style="flex:1;"><label>Hodiny Military RP:</label><input type="number" id="h_mil" required></div>
+                <div class="input-group" style="flex:1;"><label>Hodiny RP Celkem:</label><input type="number" id="h_total" required></div>
+            </div>
+            <button type="button" class="btn" onclick="toggleStep(2)">POKRAČOVAT NA IC ČÁST →</button>
+        </div>
+
+        <div class="form-step" id="step2">
+            <h2 style="color: #c4d6a0; border-left: 4px solid #4a5d23; padding-left: 10px;">02 | IC PŘIHLÁŠKA</h2>
+            <div class="input-group">
+                <label>Jméno a příjmení postavy:</label>
+                <input type="text" id="ic_name" required>
+            </div>
+            <div class="input-group">
+                <label>Datum narození (Min. 18 let):</label>
+                <input type="date" id="dob" required>
+            </div>
+            <div class="input-group">
+                <label>Proč se chcete stát členem AČR?</label>
+                <textarea id="why_acr" rows="3" required></textarea>
+            </div>
+            <div class="input-group">
+                <label>Proč bychom měli vzít právě vás?</label>
+                <textarea id="why_you" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn">ODESLAT PŘIHLÁŠKU K POSOUZENÍ</button>
+            <p style="text-align: center; cursor: pointer; color: #666; font-size: 0.8em; margin-top:15px;" onclick="toggleStep(1)">← Zpět na OOC</p>
+        </div>
+    </form>
+
+    <footer>VYTVOŘENO: <span class="author">𝐋𝐮𝐤𝐲𝐬𝐞𝐤𝐤</span></footer>
+</div>
+
+<script>
+    // !!! SEM VLOŽ SVŮJ DISCORD WEBHOOK URL !!!
+    const WEBHOOK_URL = "SEM_VLOZ_TVUJ_WEBHOOK_URL";
+
+    function toggleStep(s) {
+        document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
+        document.getElementById('step' + s).classList.add('active');
+        window.scrollTo(0,0);
+    }
+
+    // Blokace věku pod 18 let
+    const today = new Date();
+    const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate()).toISOString().split("T")[0];
+    document.getElementById('dob').setAttribute("max", maxDate);
+
+    document.getElementById('armyForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const data = {
+            username: "AČR Náborový Bot",
+            avatar_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Emblem_of_the_Czech_Army.svg/1200px-Emblem_of_the_Czech_Army.svg.png",
+            embeds: [{
+                title: "📩 NOVÁ PŘIHLÁŠKA: [RD Military AČR]",
+                color: 4414979,
+                fields: [
+                    { name: "👤 Discord Nick", value: document.getElementById('discord').value, inline: true },
+                    { name: "🎂 Věk (OOC)", value: document.getElementById('age').value, inline: true },
+                    { name: "🕒 Hodiny (Mil/Total)", value: document.getElementById('h_mil').value + " / " + document.getElementById('h_total').value, inline: true },
+                    { name: "📝 O mně (OOC)", value: document.getElementById('ooc_bio').value },
+                    { name: "🪪 IC Jméno", value: document.getElementById('ic_name').value, inline: true },
+                    { name: "📅 IC Datum narození", value: document.getElementById('dob').value, inline: true },
+                    { name: "❓ Proč k nám?", value: document.getElementById('why_acr').value },
+                    { name: "🎯 Proč on?", value: document.getElementById('why_you').value }
+                ],
+                footer: { text: "Systém vytvořil Lukysekk" },
+                timestamp: new Date()
+            }]
+        };
+
+        fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(() => {
+            alert('Přihláška byla úspěšně odeslána na velitelství!');
+            location.reload();
+        }).catch(() => {
+            alert('Chyba! Zkontroluj, zda máš správně vložený Webhook URL v kódu.');
+        });
+    });
+</script>
+</body>
+</html>
